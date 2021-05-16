@@ -1,0 +1,260 @@
+=================START EXPERIMENT=================
+
+++++++node+++++
+state Y: 0
+X: 0
+Height: 150
+parent null lc 0 gc 0 erc 0 etc 0
+++++end node++++
+
+++++++node+++++
+state Y: 0
+X: 1
+Height: 150
+parent Y: 0
+X: 0
+Height: 150 lc 1 gc 1 erc 0 etc 1
+++++end node++++
+
+++++++node+++++
+state Y: 0
+X: 2
+Height: 150
+parent Y: 0
+X: 1
+Height: 150 lc 1 gc 2 erc 0 etc 2
+++++end node++++
+
+++++++node+++++
+state Y: 0
+X: 3
+Height: 150
+parent Y: 0
+X: 2
+Height: 150 lc 1 gc 3 erc 0 etc 3
+++++end node++++
+
+++++++node+++++
+state Y: 0
+X: 4
+Height: 150
+parent Y: 0
+X: 3
+Height: 150 lc 1 gc 4 erc 0 etc 4
+++++end node++++
+
+++++++node+++++
+state Y: 0
+X: 5
+Height: 150
+parent Y: 0
+X: 4
+Height: 150 lc 1 gc 5 erc 0 etc 5
+++++end node++++
+
+++++++node+++++
+state Y: 0
+X: 6
+Height: 150
+parent Y: 0
+X: 5
+Height: 150 lc 1 gc 6 erc 0 etc 6
+++++end node++++
+
+++++++node+++++
+state Y: 0
+X: 7
+Height: 150
+parent Y: 0
+X: 6
+Height: 150 lc 1 gc 7 erc 0 etc 7
+++++end node++++
+
+++++++node+++++
+state Y: 0
+X: 8
+Height: 150
+parent Y: 0
+X: 7
+Height: 150 lc 1 gc 8 erc 0 etc 8
+++++end node++++
+
+++++++node+++++
+state Y: 0
+X: 9
+Height: 150
+parent Y: 0
+X: 8
+Height: 150 lc 1 gc 9 erc 0 etc 9
+++++end node++++
+
+++++++node+++++
+state Y: 0
+X: 10
+Height: 150
+parent Y: 0
+X: 9
+Height: 150 lc 1 gc 10 erc 0 etc 10
+++++end node++++
+
+++++++node+++++
+state Y: 1
+X: 10
+Height: 140
+parent Y: 0
+X: 10
+Height: 150 lc 1 gc 11 erc 0 etc 11
+++++end node++++
+
+++++++node+++++
+state Y: 2
+X: 10
+Height: 130
+parent Y: 1
+X: 10
+Height: 140 lc 1 gc 12 erc 0 etc 12
+++++end node++++
+
+++++++node+++++
+state Y: 3
+X: 10
+Height: 100
+parent Y: 2
+X: 10
+Height: 130 lc 1 gc 13 erc 0 etc 13
+++++end node++++
+
+++++++node+++++
+state Y: 3
+X: 11
+Height: 50
+parent Y: 3
+X: 10
+Height: 100 lc 1 gc 14 erc 0 etc 14
+++++end node++++
+
+++++++node+++++
+state Y: 4
+X: 11
+Height: 50
+parent Y: 3
+X: 11
+Height: 50 lc 1 gc 15 erc 0 etc 15
+++++end node++++
+
+++++++node+++++
+state Y: 5
+X: 11
+Height: 50
+parent Y: 4
+X: 11
+Height: 50 lc 1 gc 16 erc 0 etc 16
+++++end node++++
+
+++++++node+++++
+state Y: 6
+X: 11
+Height: 50
+parent Y: 5
+X: 11
+Height: 50 lc 1 gc 17 erc 0 etc 17
+++++end node++++
+
+++++++node+++++
+state Y: 6
+X: 12
+Height: 50
+parent Y: 6
+X: 11
+Height: 50 lc 1 gc 18 erc 0 etc 18
+++++end node++++
+
+++++++node+++++
+state Y: 6
+X: 13
+Height: 50
+parent Y: 6
+X: 12
+Height: 50 lc 1 gc 19 erc 0 etc 19
+++++end node++++
+
+++++++node+++++
+state Y: 7
+X: 13
+Height: 50
+parent Y: 6
+X: 13
+Height: 50 lc 1 gc 20 erc 0 etc 20
+++++end node++++
+
+++++++node+++++
+state Y: 8
+X: 13
+Height: 50
+parent Y: 7
+X: 13
+Height: 50 lc 1 gc 21 erc 0 etc 21
+++++end node++++
+
+++++++node+++++
+state Y: 9
+X: 13
+Height: 50
+parent Y: 8
+X: 13
+Height: 50 lc 1 gc 22 erc 0 etc 22
+++++end node++++
+
+++++++node+++++
+state Y: 10
+X: 13
+Height: 50
+parent Y: 9
+X: 13
+Height: 50 lc 1 gc 23 erc 0 etc 23
+++++end node++++
+
+++++++node+++++
+state Y: 11
+X: 13
+Height: 50
+parent Y: 10
+X: 13
+Height: 50 lc 1 gc 24 erc 0 etc 24
+++++end node++++
+
+++++++node+++++
+state Y: 12
+X: 13
+Height: 50
+parent Y: 11
+X: 13
+Height: 50 lc 1 gc 25 erc 0 etc 25
+++++end node++++
+
+++++++node+++++
+state Y: 12
+X: 12
+Height: 50
+parent Y: 12
+X: 13
+Height: 50 lc 1 gc 26 erc 0 etc 26
+++++end node++++
+
+++++++node+++++
+state Y: 12
+X: 11
+Height: 80
+parent Y: 12
+X: 12
+Height: 50 lc 31 gc 57 erc 0 etc 57
+++++end node++++
+
+++++++node+++++
+state Y: 13
+X: 11
+Height: 150
+parent Y: 12
+X: 11
+Height: 80 lc 71 gc 128 erc 0 etc 128
+++++end node++++
