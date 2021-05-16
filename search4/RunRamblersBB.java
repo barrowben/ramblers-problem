@@ -10,37 +10,46 @@
 import java.util.*;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.Random;
 
 public class RunRamblersBB {
   public static void main(String[] arg) {
 
     TerrainMap tMap = new TerrainMap("tmc.pgm");
 
-    for (int i = 0; i<16; i++) {
-        for (int j = 0; j<16; j++) {
-            RamblersSearch rSearcher = new RamblersSearch(tMap, i , j); // value = 150
-            SearchState initState = new RamblersState(150, 0, 0, 0);
-            System.out.println(initState);
+    for (int i = 0; i<5; i++) {     
+        int min = 0;
+        int max = tMap.getWidth();
+        Random random = new Random();
+        int randomYOrigin = random.nextInt(max + min);
+        int randomXOrigin = random.nextInt(max + min);
+        int randomYGoal = random.nextInt(max + min);
+        int randomXGoal = random.nextInt(max + min);
+        int initialHeight = tMap.getHeight();
 
-            String res_bb = rSearcher.runSearch(initState, "branchAndBound");
-            System.out.println(res_bb);
+        RamblersSearch rSearcher = new RamblersSearch(tMap, randomYGoal , randomXGoal);
 
-            String fileName = ".log/output_" + i + "_" + j + ".txt";
+        SearchState initState = new RamblersState(initialHeight, randomYOrigin, randomXOrigin, 0);
+        System.out.println(initState);
 
-            // Log the console output to a textfile
-            try {
-                FileWriter file = new FileWriter(fileName);
-                PrintWriter output = new PrintWriter(file, true);
-                output.append("=================");
-                output.append("START EXPERIMENT");
-                output.append("=================");
-                output.append("\n");
-                output.append(res_bb);
-                output.append("\n");
-                output.close();
-            } catch (Exception e) {
-                e.getStackTrace();
-            }
+        String res_bb = rSearcher.runSearch(initState, "branchAndBound");
+        System.out.println(res_bb);
+
+        String fileName = ".log/output_" + randomYOrigin + "-" + randomXOrigin  + "_" + randomYGoal  + "-" + randomXGoal + ".txt";
+
+        // Log the console output to a textfile
+        try {
+            FileWriter file = new FileWriter(fileName);
+            PrintWriter output = new PrintWriter(file, true);
+            output.append("=================");
+            output.append("START EXPERIMENT");
+            output.append("=================");
+            output.append("\n");
+            output.append(res_bb);
+            output.append("\n");
+            output.close();
+        } catch (Exception e) {
+            e.getStackTrace();
         }
     }
   }
