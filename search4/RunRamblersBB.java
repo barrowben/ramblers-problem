@@ -10,7 +10,6 @@
 import java.util.*;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.Random;
 
 public class RunRamblersBB {
   public static void main(String[] arg) {
