@@ -50,7 +50,7 @@ public class RamblersState extends SearchState {
         RamblersSearch rSearcher = (RamblersSearch) searcher;
         TerrainMap terrainMap = rSearcher.getTMap();
         int maxX = terrainMap.getWidth();
-        int maxY = terrainMap.getHeight();
+        int maxY = terrainMap.getDepth();
         int[][] terrainMapArray = terrainMap.getTmap();
 
         ArrayList<SearchState> succs = new ArrayList<SearchState>();
@@ -63,7 +63,7 @@ public class RamblersState extends SearchState {
         }
 
         // If Y Coordinate isn't the max, there is a successor tile to the south
-        if(yCoord < maxY) {
+        if(yCoord < maxY - 1) {
             int neighbourHeight = terrainMapArray[yCoord+1][xCoord];
             int cost = (neighbourHeight > localHeight) ? (1 + neighbourHeight - localHeight) : 1;
             succs.add((SearchState) new RamblersState(neighbourHeight, yCoord + 1, xCoord, cost));
@@ -77,7 +77,7 @@ public class RamblersState extends SearchState {
         }
 
         // If X Coordinate isn't the max, there is a successor tile to the east
-        if(xCoord < maxX) {
+        if(xCoord < maxX - 1) {
             int neighbourHeight = terrainMapArray[yCoord][xCoord+1];
             int cost = (neighbourHeight > localHeight) ? (1 + neighbourHeight - localHeight) : 1;
             succs.add((SearchState) new RamblersState(neighbourHeight, yCoord, xCoord + 1, cost));

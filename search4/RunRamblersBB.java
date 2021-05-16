@@ -14,7 +14,7 @@ public class RunRamblersBB {
 
     TerrainMap tMap = new TerrainMap("tmc.pgm");
 
-    RamblersSearch rSearcher = new RamblersSearch(tMap, 4 , 4); // value = 70
+    RamblersSearch rSearcher = new RamblersSearch(tMap, 15 , 15); // value = 150
     SearchState initState = new RamblersState(150, 0, 0, 0);
 
     String res_bb = rSearcher.runSearch(initState, "branchAndBound");
