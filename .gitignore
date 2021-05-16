@@ -4,3 +4,6 @@
 # VS Code stuff
 .vscode/
 .code-workspace
+
+# Apple folder setting
+.DS_Store
