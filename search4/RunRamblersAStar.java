@@ -12,17 +12,17 @@ import java.util.*;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
-public class RunRamblersBB {
+public class RunRamblersAStar {
   public static void main(String[] arg) {
 
     // Create PrintWriter object for output
     PrintWriter output = null;
 
     // Change the strategy here
-    String strategy = "brandAndBound";
+    String strategy = "aStar";
 
     // Create TerrainMap object
-    TerrainMap tMap = new TerrainMap("tmc.pgm");
+    TerrainMap tMap = new TerrainMap("diablo.pgm");
 
     // Write the csv column headers for logging
     try {
@@ -35,7 +35,7 @@ public class RunRamblersBB {
     }
 
     // Run the experiment 1000 times with random start and goal nodes
-    for (int i = 0; i<1000; i++) {     
+    for (int i = 0; i<10; i++) {     
         int maxX = tMap.getWidth();
         int maxY = tMap.getDepth();
         Random random = new Random();
@@ -51,7 +51,7 @@ public class RunRamblersBB {
         RamblersSearch rSearcher = new RamblersSearch(tMap, randomYGoal , randomXGoal);
         SearchState initState = new RamblersState(initialHeight, randomYOrigin, randomXOrigin, 0, 0);
         float res_bb = rSearcher.runSearchE(initState, strategy);
-        System.out.println(res_bb);
+        System.out.println(res_bb); 
 
         // Log the output to a textfile
         try {

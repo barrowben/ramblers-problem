@@ -53,40 +53,69 @@ public class RamblersState extends SearchState {
         int maxX = terrainMap.getWidth();
         int maxY = terrainMap.getDepth();
         int[][] terrainMapArray = terrainMap.getTmap();
+        
+        // Get the average height of the map
+        int sum = 0;
+        int count = 0;
+        double averageHeight = 0.0;
+        for (int i=0;i<maxX;i++) {
+            for (int j=0;j<maxY;j++) {
+                sum += terrainMapArray[j][i];
+                count++;
+            }
+            averageHeight = sum/count;
+        }
 
         // Get goal coordinates
         int goalY = rSearcher.getGoalY();
         int goalX = rSearcher.getGoalX();
+        int goalHeight = terrainMapArray[goalY][goalX];
 
         ArrayList<SearchState> succs = new ArrayList<SearchState>();
 
-        // If Y Coordinate isn't 0, there is a successor tile to the north
+        // If Y Coordinate isn't 0, there is a successor node to the north
         if (yCoord != 0) {
             int neighbourHeight = terrainMapArray[yCoord-1][xCoord];
             int cost = (neighbourHeight > localHeight) ? (1 + neighbourHeight - localHeight) : 1;
             // A* : Euclidean Distance
-            // int estRemCost = (int) Math.sqrt((Math.pow((goalY - yCoord-1), 2) + Math.pow((goalX - xCoord), 2)));
+            // estRemCost = (int) Math.sqrt((Math.pow((goalY - yCoord-1), 2) + Math.pow((goalX - xCoord), 2)));
 
             // A* : Manhattan Distance
             int estRemCost = (int) (Math.abs(goalY - yCoord-1) + Math.abs(goalX - xCoord));
 
+            // // Height diff (use in addition to Manhatten or Euclidean)
+            estRemCost += Math.abs(neighbourHeight - goalHeight);
+
+            // Height diff between average height and neighbourHeight
+            // If the neighbourHeight is lower than averageHeight, estRemCost will be reduced
+            // If neightbourHeight is higher than averageHeight estRemCost will increase
+            // estRemCost += (int) (averageHeight - neighbourHeight);
+
             succs.add((SearchState) new RamblersState(neighbourHeight, yCoord - 1, xCoord, cost, estRemCost));
         }
 
-        // If Y Coordinate isn't the max, there is a successor tile to the south
+        // If Y Coordinate isn't the max, there is a successor node to the south
         if(yCoord < maxY - 1) {
             int neighbourHeight = terrainMapArray[yCoord+1][xCoord];
             int cost = (neighbourHeight > localHeight) ? (1 + neighbourHeight - localHeight) : 1;
             // A* : Euclidean Distance
             // int estRemCost = (int) Math.sqrt((Math.pow((goalY - yCoord+1), 2) + Math.pow((goalX - xCoord), 2)));
 
-            // A* : Manhattan Distance
+            // // A* : Manhattan Distance
             int estRemCost = (int) (Math.abs(goalY - yCoord+1) + Math.abs(goalX - xCoord));
 
-            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord + 1, xCoord, cost, 0));
+            // // Height diff (use in addition to Manhatten or Euclidean)
+            estRemCost += Math.abs(neighbourHeight - goalHeight);
+
+            // Height diff between average height and neighbourHeight
+            // If the neighbourHeight is lower than averageHeight, estRemCost will be reduced
+            // If neightbourHeight is higher than averageHeight estRemCost will increase
+            // estRemCost += (int) (averageHeight - neighbourHeight);
+
+            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord + 1, xCoord, cost, estRemCost));
         }
 
-        // If X Coordinate isn't 0, there is a successor tile to the west
+        // If X Coordinate isn't 0, there is a successor node to the west
         if(xCoord != 0) {
             int neighbourHeight = terrainMapArray[yCoord][xCoord-1];
             int cost = (neighbourHeight > localHeight) ? (1 + neighbourHeight - localHeight) : 1;
@@ -96,10 +125,18 @@ public class RamblersState extends SearchState {
             // A* : Manhattan Distance
             int estRemCost = (int) (Math.abs(goalY - yCoord) + Math.abs(goalX - xCoord-1));
 
-            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord, xCoord - 1, cost, 0));
+            // // Height diff (use in addition to Manhatten or Euclidean)
+            estRemCost += Math.abs(neighbourHeight - goalHeight);
+
+            // Height diff between average height and neighbourHeight
+            // If the neighbourHeight is lower than averageHeight, estRemCost will be reduced
+            // If neightbourHeight is higher than averageHeight estRemCost will increase
+            // estRemCost += (int) (averageHeight - neighbourHeight);
+
+            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord, xCoord - 1, cost, estRemCost));
         }
 
-        // If X Coordinate isn't the max, there is a successor tile to the east
+        // If X Coordinate isn't the max, there is a successor node to the east
         if(xCoord < maxX - 1) {
             int neighbourHeight = terrainMapArray[yCoord][xCoord+1];
             int cost = (neighbourHeight > localHeight) ? (1 + neighbourHeight - localHeight) : 1;
@@ -109,7 +146,15 @@ public class RamblersState extends SearchState {
             // A* : Manhattan Distance
             int estRemCost = (int) (Math.abs(goalY - yCoord) + Math.abs(goalX - xCoord+1));
 
-            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord, xCoord + 1, cost, 0));
+            // // Height diff (use in addition to Manhatten or Euclidean)
+            estRemCost += Math.abs(neighbourHeight - goalHeight);
+
+            // Height diff between average height and neighbourHeight
+            // If the neighbourHeight is lower than averageHeight, estRemCost will be reduced
+            // If neightbourHeight is higher than averageHeight estRemCost will increase
+            // estRemCost += (int) (averageHeight - neighbourHeight);
+
+            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord, xCoord + 1, cost, estRemCost));
         }
 
         return succs;
