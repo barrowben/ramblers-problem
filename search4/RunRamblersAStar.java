@@ -22,20 +22,23 @@ public class RunRamblersAStar {
     String strategy = "aStar";
 
     // Create TerrainMap object
-    TerrainMap tMap = new TerrainMap("diablo.pgm");
+    TerrainMap tMap = new TerrainMap("tmc.pgm");
 
     // Write the csv column headers for logging
     try {
         FileWriter file = new FileWriter(".log/" + strategy + "_output.csv", true);
         output = new PrintWriter(file, true);
-        output.append("Start Y,Start X,Goal Y,Goal X,Efficiency");
+        output.append("Start Y,Start X,Goal Y,Goal X,Efficiency,Execution Time");
         output.close();
     } catch (Exception e) {
         System.out.println(e.getStackTrace());
     }
 
+    // Get start time to work out execution time when search complete
+    long startTime = System.currentTimeMillis();
+
     // Run the experiment 1000 times with random start and goal nodes
-    for (int i = 0; i<10; i++) {     
+    for (int i = 0; i<100; i++) {     
         int maxX = tMap.getWidth();
         int maxY = tMap.getDepth();
         Random random = new Random();
@@ -51,7 +54,10 @@ public class RunRamblersAStar {
         RamblersSearch rSearcher = new RamblersSearch(tMap, randomYGoal , randomXGoal);
         SearchState initState = new RamblersState(initialHeight, randomYOrigin, randomXOrigin, 0, 0);
         float res_bb = rSearcher.runSearchE(initState, strategy);
-        System.out.println(res_bb); 
+        long endTime = System.currentTimeMillis();
+        System.out.print("Efficiency: ");
+        System.out.println(res_bb);
+        System.out.println("Elapsed time: " + (endTime - startTime) + " milliseconds");
 
         // Log the output to a textfile
         try {
@@ -62,7 +68,8 @@ public class RunRamblersAStar {
             output.append(randomXOrigin + ",");
             output.append(randomYGoal + ",");
             output.append(randomXGoal + ",");
-            output.append(String.valueOf(res_bb));
+            output.append(String.valueOf(res_bb) + ",");
+            output.append(String.valueOf(endTime - startTime));
             output.close();
         } catch (Exception e) {
             System.out.println(e.getStackTrace());

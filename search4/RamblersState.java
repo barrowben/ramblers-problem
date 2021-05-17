@@ -83,7 +83,7 @@ public class RamblersState extends SearchState {
             // A* : Manhattan Distance
             int estRemCost = (int) (Math.abs(goalY - yCoord-1) + Math.abs(goalX - xCoord));
 
-            // // Height diff (use in addition to Manhatten or Euclidean)
+            // // Height diff between local and goal 
             estRemCost += Math.abs(neighbourHeight - goalHeight);
 
             // Height diff between average height and neighbourHeight
@@ -104,7 +104,7 @@ public class RamblersState extends SearchState {
             // // A* : Manhattan Distance
             int estRemCost = (int) (Math.abs(goalY - yCoord+1) + Math.abs(goalX - xCoord));
 
-            // // Height diff (use in addition to Manhatten or Euclidean)
+            // // Height diff between local and goal 
             estRemCost += Math.abs(neighbourHeight - goalHeight);
 
             // Height diff between average height and neighbourHeight
@@ -125,7 +125,7 @@ public class RamblersState extends SearchState {
             // A* : Manhattan Distance
             int estRemCost = (int) (Math.abs(goalY - yCoord) + Math.abs(goalX - xCoord-1));
 
-            // // Height diff (use in addition to Manhatten or Euclidean)
+            // // Height diff between local and goal 
             estRemCost += Math.abs(neighbourHeight - goalHeight);
 
             // Height diff between average height and neighbourHeight
@@ -146,7 +146,7 @@ public class RamblersState extends SearchState {
             // A* : Manhattan Distance
             int estRemCost = (int) (Math.abs(goalY - yCoord) + Math.abs(goalX - xCoord+1));
 
-            // // Height diff (use in addition to Manhatten or Euclidean)
+            // // Height diff between local and goal (use in addition to Manhatten or Euclidean)
             estRemCost += Math.abs(neighbourHeight - goalHeight);
 
             // Height diff between average height and neighbourHeight
