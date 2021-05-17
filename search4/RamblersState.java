@@ -13,11 +13,12 @@ public class RamblersState extends SearchState {
     private int xCoord;
 
     // constructor
-    public RamblersState(int lHeight, int y, int x, int lc) {
+    public RamblersState(int lHeight, int y, int x, int elc, int erm) {
         this.localHeight = lHeight;
         this.yCoord = y;
         this.xCoord = x;
-        this.localCost = lc;
+        this.localCost = elc;
+        this.estRemCost = erm;
     }
 
     // accessor
@@ -53,34 +54,62 @@ public class RamblersState extends SearchState {
         int maxY = terrainMap.getDepth();
         int[][] terrainMapArray = terrainMap.getTmap();
 
+        // Get goal coordinates
+        int goalY = rSearcher.getGoalY();
+        int goalX = rSearcher.getGoalX();
+
         ArrayList<SearchState> succs = new ArrayList<SearchState>();
 
         // If Y Coordinate isn't 0, there is a successor tile to the north
         if (yCoord != 0) {
             int neighbourHeight = terrainMapArray[yCoord-1][xCoord];
             int cost = (neighbourHeight > localHeight) ? (1 + neighbourHeight - localHeight) : 1;
-            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord - 1, xCoord, cost));
+            // A* : Euclidean Distance
+            // int estRemCost = (int) Math.sqrt((Math.pow((goalY - yCoord-1), 2) + Math.pow((goalX - xCoord), 2)));
+
+            // A* : Manhattan Distance
+            int estRemCost = (int) (Math.abs(goalY - yCoord-1) + Math.abs(goalX - xCoord));
+
+            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord - 1, xCoord, cost, estRemCost));
         }
 
         // If Y Coordinate isn't the max, there is a successor tile to the south
         if(yCoord < maxY - 1) {
             int neighbourHeight = terrainMapArray[yCoord+1][xCoord];
             int cost = (neighbourHeight > localHeight) ? (1 + neighbourHeight - localHeight) : 1;
-            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord + 1, xCoord, cost));
+            // A* : Euclidean Distance
+            // int estRemCost = (int) Math.sqrt((Math.pow((goalY - yCoord+1), 2) + Math.pow((goalX - xCoord), 2)));
+
+            // A* : Manhattan Distance
+            int estRemCost = (int) (Math.abs(goalY - yCoord+1) + Math.abs(goalX - xCoord));
+
+            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord + 1, xCoord, cost, 0));
         }
 
         // If X Coordinate isn't 0, there is a successor tile to the west
         if(xCoord != 0) {
             int neighbourHeight = terrainMapArray[yCoord][xCoord-1];
             int cost = (neighbourHeight > localHeight) ? (1 + neighbourHeight - localHeight) : 1;
-            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord, xCoord - 1, cost));
+            // A* : Euclidean Distance
+            // int estRemCost = (int) Math.sqrt((Math.pow((goalY - yCoord), 2) + Math.pow((goalX - xCoord-1), 2)));
+
+            // A* : Manhattan Distance
+            int estRemCost = (int) (Math.abs(goalY - yCoord) + Math.abs(goalX - xCoord-1));
+
+            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord, xCoord - 1, cost, 0));
         }
 
         // If X Coordinate isn't the max, there is a successor tile to the east
         if(xCoord < maxX - 1) {
             int neighbourHeight = terrainMapArray[yCoord][xCoord+1];
             int cost = (neighbourHeight > localHeight) ? (1 + neighbourHeight - localHeight) : 1;
-            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord, xCoord + 1, cost));
+            // A* : Euclidean Distance
+            // int estRemCost = (int) Math.sqrt((Math.pow((goalY - yCoord), 2) + Math.pow((goalX - xCoord+1), 2)));
+
+            // A* : Manhattan Distance
+            int estRemCost = (int) (Math.abs(goalY - yCoord) + Math.abs(goalX - xCoord+1));
+
+            succs.add((SearchState) new RamblersState(neighbourHeight, yCoord, xCoord + 1, cost, 0));
         }
 
         return succs;

@@ -2,6 +2,7 @@
 /**
   * RunMapSearch.java
   *
+  * TODO: Add some details here...
   *
   * Ben Barrow
   *
@@ -14,16 +15,16 @@ import java.io.PrintWriter;
 public class RunRamblersBB {
   public static void main(String[] arg) {
 
-    // Create PrintWrite obj for output
+    // Create PrintWriter object for output
     PrintWriter output = null;
 
     // Change the strategy here
-    String strategy = "branchAndBound";
+    String strategy = "aStar";
 
-    // Create TerrainMap obj
+    // Create TerrainMap object
     TerrainMap tMap = new TerrainMap("tmc.pgm");
 
-    // Write the csv column headers
+    // Write the csv column headers for logging
     try {
         FileWriter file = new FileWriter(".log/" + strategy + "_output.csv", true);
         output = new PrintWriter(file, true);
@@ -33,21 +34,22 @@ public class RunRamblersBB {
         System.out.println(e.getStackTrace());
     }
 
-    // Run the experiment 100 times with random start and goal nodes
-    for (int i = 0; i<100; i++) {     
-        int max = tMap.getWidth(); // assuming the pgm is square
+    // Run the experiment 1000 times with random start and goal nodes
+    for (int i = 0; i<1000; i++) {     
+        int maxX = tMap.getWidth();
+        int maxY = tMap.getDepth();
         Random random = new Random();
 
-        //randomise the start and goal nodes and get initial height
-        int randomYOrigin = random.nextInt(max);
-        int randomXOrigin = random.nextInt(max);
-        int randomYGoal = random.nextInt(max);
-        int randomXGoal = random.nextInt(max);
+        // Randomise the start and goal nodes and get initial height
+        int randomYOrigin = random.nextInt(maxY);
+        int randomXOrigin = random.nextInt(maxX);
+        int randomYGoal = random.nextInt(maxY);
+        int randomXGoal = random.nextInt(maxX);
         int initialHeight = tMap.getHeight();
 
         // Start the search
         RamblersSearch rSearcher = new RamblersSearch(tMap, randomYGoal , randomXGoal);
-        SearchState initState = new RamblersState(initialHeight, randomYOrigin, randomXOrigin, 0);
+        SearchState initState = new RamblersState(initialHeight, randomYOrigin, randomXOrigin, 0, 0);
         float res_bb = rSearcher.runSearchE(initState, strategy);
         System.out.println(res_bb);
 
