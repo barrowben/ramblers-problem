@@ -1,10 +1,12 @@
 
 /**
-  * RunMapSearch.java
+  * RunRamblersBB.java
   *
-  * TODO: Add some details here...
+  * Main class for running branch-and-bound search
+  * Once the search has been run, please check /.log for results (csv format)
+  * A full solution path can be output by calling RunSearch instead of RunSearchE (line 58)
   *
-  * Ben Barrow
+  * Ben Barrow 2021
   *
 */
 
@@ -22,7 +24,7 @@ public class RunRamblersBB {
     String strategy = "brandAndBound";
 
     // Create TerrainMap object
-    TerrainMap tMap = new TerrainMap("tmc.pgm");
+    TerrainMap tMap = new TerrainMap("diablo.pgm");
 
     // Write the csv column headers for logging
     try {
@@ -34,14 +36,14 @@ public class RunRamblersBB {
         System.out.println(e.getStackTrace());
     }
 
-    // Get start time to work out execution time when search complete
-    long startTime = System.currentTimeMillis();
-
     // Run the experiment 1000 times with random start and goal nodes
     for (int i = 0; i<100; i++) {     
         int maxX = tMap.getWidth();
         int maxY = tMap.getDepth();
         Random random = new Random();
+
+        // Get start time to work out execution time when search complete
+        long startTime = System.currentTimeMillis();
 
         // Randomise the start and goal nodes and get initial height
         int randomYOrigin = random.nextInt(maxY);
@@ -51,7 +53,7 @@ public class RunRamblersBB {
         int initialHeight = tMap.getHeight();
 
         // Start the search
-        RamblersSearch rSearcher = new RamblersSearch(tMap, randomYGoal , randomXGoal);
+        RamblersSearch rSearcher = new RamblersSearch(tMap, randomYGoal, randomXGoal);
         SearchState initState = new RamblersState(initialHeight, randomYOrigin, randomXOrigin, 0, 0);
         float res_bb = rSearcher.runSearchE(initState, strategy);    
         long endTime = System.currentTimeMillis();

@@ -1,5 +1,9 @@
 /*
-*	State in a map search
+*	RamblersState in a mapSearch
+*   
+*   To experiment with different heuristic functions, please uncomment the relavant
+*   lines below
+*   
 *	Ben Barrow 2021
 */
 
@@ -21,7 +25,7 @@ public class RamblersState extends SearchState {
         this.estRemCost = erm;
     }
 
-    // accessor
+    // accessors
     public int getHeight() {
         return localHeight;
     }
@@ -84,11 +88,9 @@ public class RamblersState extends SearchState {
             int estRemCost = (int) (Math.abs(goalY - yCoord-1) + Math.abs(goalX - xCoord));
 
             // // Height diff between local and goal 
-            estRemCost += Math.abs(neighbourHeight - goalHeight);
+            estRemCost += (Math.abs(neighbourHeight - goalHeight));
 
             // Height diff between average height and neighbourHeight
-            // If the neighbourHeight is lower than averageHeight, estRemCost will be reduced
-            // If neightbourHeight is higher than averageHeight estRemCost will increase
             // estRemCost += (int) (averageHeight - neighbourHeight);
 
             succs.add((SearchState) new RamblersState(neighbourHeight, yCoord - 1, xCoord, cost, estRemCost));
@@ -105,11 +107,9 @@ public class RamblersState extends SearchState {
             int estRemCost = (int) (Math.abs(goalY - yCoord+1) + Math.abs(goalX - xCoord));
 
             // // Height diff between local and goal 
-            estRemCost += Math.abs(neighbourHeight - goalHeight);
+            estRemCost += (Math.abs(neighbourHeight - goalHeight));
 
             // Height diff between average height and neighbourHeight
-            // If the neighbourHeight is lower than averageHeight, estRemCost will be reduced
-            // If neightbourHeight is higher than averageHeight estRemCost will increase
             // estRemCost += (int) (averageHeight - neighbourHeight);
 
             succs.add((SearchState) new RamblersState(neighbourHeight, yCoord + 1, xCoord, cost, estRemCost));
@@ -126,11 +126,9 @@ public class RamblersState extends SearchState {
             int estRemCost = (int) (Math.abs(goalY - yCoord) + Math.abs(goalX - xCoord-1));
 
             // // Height diff between local and goal 
-            estRemCost += Math.abs(neighbourHeight - goalHeight);
+            estRemCost += (Math.abs(neighbourHeight - goalHeight));
 
             // Height diff between average height and neighbourHeight
-            // If the neighbourHeight is lower than averageHeight, estRemCost will be reduced
-            // If neightbourHeight is higher than averageHeight estRemCost will increase
             // estRemCost += (int) (averageHeight - neighbourHeight);
 
             succs.add((SearchState) new RamblersState(neighbourHeight, yCoord, xCoord - 1, cost, estRemCost));
@@ -147,16 +145,13 @@ public class RamblersState extends SearchState {
             int estRemCost = (int) (Math.abs(goalY - yCoord) + Math.abs(goalX - xCoord+1));
 
             // // Height diff between local and goal (use in addition to Manhatten or Euclidean)
-            estRemCost += Math.abs(neighbourHeight - goalHeight);
+            estRemCost += (Math.abs(neighbourHeight - goalHeight));
 
             // Height diff between average height and neighbourHeight
-            // If the neighbourHeight is lower than averageHeight, estRemCost will be reduced
-            // If neightbourHeight is higher than averageHeight estRemCost will increase
             // estRemCost += (int) (averageHeight - neighbourHeight);
 
             succs.add((SearchState) new RamblersState(neighbourHeight, yCoord, xCoord + 1, cost, estRemCost));
         }
-
         return succs;
     }
     

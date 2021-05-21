@@ -1,5 +1,7 @@
 /*
 * 	RamblersSearch.java
+*
+*   Ben Barrow 2021
 */
 
 import java.util.*;
@@ -10,6 +12,7 @@ public class RamblersSearch extends Search {
   private int goalY; // goal y coordinate
   private int goalX; // goal x coordinate 
 
+  // accessors
   public TerrainMap getTMap() {
     return tMap;
   }
@@ -22,6 +25,7 @@ public class RamblersSearch extends Search {
     return goalX;
   }
 
+  // constructor
   public RamblersSearch(TerrainMap t, int y, int x) {
     this.tMap = t;
     this.goalY = y;
