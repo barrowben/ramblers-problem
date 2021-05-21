@@ -3,7 +3,7 @@
   * RunRamblersBB.java
   *
   * Main class for running branch-and-bound search
-  * Once the search has been run, please check /.log for results (csv format)
+  * Once the search has been run, please check /_log for results (csv format)
   * A full solution path can be output by calling RunSearch instead of RunSearchE (line 58)
   *
   * Ben Barrow 2021
@@ -21,14 +21,14 @@ public class RunRamblersBB {
     PrintWriter output = null;
 
     // Change the strategy here
-    String strategy = "brandAndBound";
+    String strategy = "branchAndBound";
 
     // Create TerrainMap object
-    TerrainMap tMap = new TerrainMap("diablo.pgm");
+    TerrainMap tMap = new TerrainMap("tmc.pgm");
 
     // Write the csv column headers for logging
     try {
-        FileWriter file = new FileWriter(".log/" + strategy + "_output.csv", true);
+        FileWriter file = new FileWriter("_log/" + strategy + "_output.csv", true);
         output = new PrintWriter(file, true);
         output.append("Start Y,Start X,Goal Y,Goal X,Efficiency,Execution Time");
         output.close();
@@ -63,7 +63,7 @@ public class RunRamblersBB {
 
         // Log the output to a textfile
         try {
-            FileWriter file = new FileWriter(".log/" + strategy + "_output.csv", true);
+            FileWriter file = new FileWriter("_log/" + strategy + "_output.csv", true);
             output = new PrintWriter(file, true);
             output.append("\n");
             output.append(randomYOrigin + ",");
